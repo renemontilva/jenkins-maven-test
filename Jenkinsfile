@@ -17,7 +17,7 @@ pipeline {
         }
         stage("Static Code Analysis") {
             steps {
-                withSonarQubeEnv(installationName: 'sonar') {
+                withSonarQubeEnv(installationName: 'sonar', credentialsId: 'sonar') {
                     sh "mvn clean sonar:sonar"
                 }
             }
@@ -30,7 +30,7 @@ pipeline {
     }
     post {
         always {
-            sh "echo 'Notification"
+            sh "echo 'Notification'"
         }
     }
 }
