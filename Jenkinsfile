@@ -24,7 +24,7 @@ pipeline {
         }
         stage("Artifact") {
             steps {
-                sh "echo 'Artifact"
+                sh "echo 'Artifact'"
             }
         }
     }
