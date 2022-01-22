@@ -1,21 +1,25 @@
 pipeline {
     agent any
+    tools {
+        maven 'mvn36'
+    }
 
     stages {
-        stage("Build") {
+        stage("Compile") {
             steps {
-                sh "echo 'building"
+                sh "mvn clean compile"
             }
         }
         stage("Test") {
             steps {
-                sh "eho 'test"
+                sh "mvn test"
             }
         }
-        stage("SAST") {
+        stage("Static Code Analysis") {
             steps {
-                sh "echo 'sonar"
-
+                withSonarQubeEnv(installationName: 'sonar') {
+                    sh "mvn clean sonar:sonar"
+                }
             }
         }
         stage("Artifact") {
